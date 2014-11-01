@@ -32,7 +32,4 @@ public interface ZmittappRestInterface {
     @POST("/restaurants/{restaurant_id}/unsubscribe/{user_id}")
     void UnsubscribeRestaurant(@Path("id") String restaurantId);
 
-
-
-
 }
