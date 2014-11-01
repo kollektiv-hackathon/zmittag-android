@@ -3,6 +3,7 @@ package kollektiv.zmittapp.serverconnections;
 import kollektiv.zmittapp.entities.Menu;
 import kollektiv.zmittapp.entities.Restaurant;
 import retrofit.http.GET;
+import retrofit.http.POST;
 import retrofit.http.Path;
 
 /**
@@ -10,17 +11,26 @@ import retrofit.http.Path;
  */
 public interface ZmittappRestInterface {
 
+    // Restaurants Allgemein
 
     @GET("/restaurants/")
     Restaurant[] getAllRestaurants();
 
+    @GET("/restaurants/{restaurant_id}")
+    Restaurant getRestaurant(@Path("restaurant_id") int restaurantId);
 
-    @GET("/restaurants/{id}")
-    Restaurant getRestaurant(@Path("id") int restaurantId);
+    @GET("/restaurants/{restaurant_id}/menuitems")
+    Menu[] getMenus(@Path("restaurant_id") int restaurantId);
 
 
-    @GET("/restaurants/{id}/menuitems")
-    Menu[] getMenus(@Path("id") int restaurantId);
+
+    // Suscribe / Unsuscribe
+
+    @POST("/restaurants/{restaurant_id}/subscribe/{user_id}")
+    void SubscribeRestaurant(@Path("id") String restaurantId);
+
+    @POST("/restaurants/{restaurant_id}/unsubscribe/{user_id}")
+    void UnsubscribeRestaurant(@Path("id") String restaurantId);
 
 
 
