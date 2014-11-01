@@ -56,7 +56,6 @@ public class GpsListener implements LocationListener {
                     .isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
             if(isGPSEnabled){
-                // TODO: GPS Location holen
                 Log.d("GpsListener", "GPS");
                 mCriteria.setAccuracy(Criteria.ACCURACY_FINE);
                 locationManager.requestSingleUpdate(mCriteria, this, null);
@@ -70,7 +69,6 @@ public class GpsListener implements LocationListener {
                 }
 
             } else if (isNetworkEnabled){
-                // TODO: Network Location holen
                 Log.d("GpsListener", "Network");
                 mCriteria.setAccuracy(Criteria.ACCURACY_COARSE);
                 locationManager.requestSingleUpdate(mCriteria, this, null);
