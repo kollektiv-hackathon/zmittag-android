@@ -49,8 +49,6 @@ public class SplashAsyncTask extends AsyncTask<Context, String, Object> {
         intent.putExtra("Restaurant", restaurants);
         contexts[0].startActivity(intent);
 
-
-
         return null;
     }
 }
