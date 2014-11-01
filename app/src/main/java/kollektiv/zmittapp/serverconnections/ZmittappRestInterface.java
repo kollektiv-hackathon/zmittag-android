@@ -22,6 +22,9 @@ public interface ZmittappRestInterface {
     @GET("/restaurants/{restaurant_id}/menuitems")
     Menu[] getMenus(@Path("restaurant_id") int restaurantId);
 
+    @GET("restaurants/location?lat={lat}?lon={lon}")
+    Restaurant[] getRestaurantsByLocation(@Path("lat") double lat, @Path("lon") double lon);
+
 
 
     // Suscribe / Unsuscribe

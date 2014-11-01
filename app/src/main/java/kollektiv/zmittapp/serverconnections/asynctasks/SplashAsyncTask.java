@@ -2,9 +2,11 @@ package kollektiv.zmittapp.serverconnections.asynctasks;
 
 import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
 import android.os.AsyncTask;
 
 import kollektiv.zmittapp.activity.MainActivity;
+import kollektiv.zmittapp.entities.Restaurant;
 import kollektiv.zmittapp.gps.GpsListener;
 import kollektiv.zmittapp.serverconnections.ZmittappRestInterface;
 import retrofit.RestAdapter;
@@ -32,8 +34,8 @@ public class SplashAsyncTask extends AsyncTask<Context, String, Object> {
     @Override
     protected Object doInBackground(Context... contexts) {
 
-        //Context rauslesen
         GpsListener mGpsListener = new GpsListener(contexts[0]);
+        Location location = mGpsListener.getLocation();
 
         //Build RestAdapter
         RestAdapter restAdapter = new RestAdapter.Builder()
@@ -41,10 +43,10 @@ public class SplashAsyncTask extends AsyncTask<Context, String, Object> {
                 .build();
 
         ZmittappRestInterface mZmittappRestInterface = restAdapter.create(ZmittappRestInterface.class);
-        // Network blabli bla bla ausführen
+        Restaurant[] restaurants = mZmittappRestInterface.getRestaurantsByLocation(location.getLatitude(), location.getLongitude());
 
         Intent intent = new Intent(contexts[0], MainActivity.class);
-        intent.putExtra("Blabla", "blabala");
+        intent.putExtra("Restaurant", restaurants);
         contexts[0].startActivity(intent);
 
 
