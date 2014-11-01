@@ -1,6 +1,7 @@
 package kollektiv.zmittapp.activity;
 
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.ProgressBar;
 
@@ -20,9 +21,6 @@ public class SplashActivity extends Activity {
         setContentView(R.layout.activity_splash);
 
        mProgressbar = (ProgressBar) findViewById(R.id.pb_splash);
-
-
-
     }
 
 
