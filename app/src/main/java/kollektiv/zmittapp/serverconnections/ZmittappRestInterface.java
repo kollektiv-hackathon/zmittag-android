@@ -12,7 +12,7 @@ import retrofit.http.Query;
  */
 public interface ZmittappRestInterface {
 
-    // Restaurants Allgemein
+    // Restaurants & Menus allgemein
 
     @GET("/restaurants/")
     Restaurant[] getAllRestaurants();
@@ -26,14 +26,16 @@ public interface ZmittappRestInterface {
     @GET("/restaurants/location")
     Restaurant[] getRestaurantsByLocation(@Query("lat") double lat, @Query("lon") double lon);
 
+    @GET("/user/{user_id}/subscriptions")
+    Restaurant[] getSubscribenRestaurants(@Path("user_id") String user_id);
 
 
     // Suscribe / Unsuscribe
 
     @POST("/restaurants/{restaurant_id}/subscribe/{user_id}")
-    void SubscribeRestaurant(@Path("id") String restaurantId);
+    void subscribeRestaurant(@Path("id") int restaurantId, @Path("user_id") String user_id);
 
     @POST("/restaurants/{restaurant_id}/unsubscribe/{user_id}")
-    void UnsubscribeRestaurant(@Path("id") String restaurantId);
+    void unsubscribeRestaurant(@Path("id") int restaurantId, @Path("user_id") String user_id);
 
 }
