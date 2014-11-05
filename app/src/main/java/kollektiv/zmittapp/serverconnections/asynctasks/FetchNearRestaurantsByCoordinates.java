@@ -49,14 +49,11 @@ public class FetchNearRestaurantsByCoordinates extends AsyncTask<Context, Intege
 
     @Override
     protected String doInBackground(Context... contexts) {
-        // TODO Auto-generated method stub
 
         while (this.latitude == 0.0) {
 
         }
 
-        Log.d("FetchNearRestaurantsByCoordiantes", "Updates senden");
-        //Build RestAdapter
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint("http://api.zmittapp.ch/app_dev.php")
                 .setRequestInterceptor(new RequestInterceptor() {
@@ -64,7 +61,6 @@ public class FetchNearRestaurantsByCoordinates extends AsyncTask<Context, Intege
                     public void intercept(RequestInterceptor.RequestFacade request) {
                         request.addHeader("Accept", "application/json");
                         request.addHeader("Content-Type  ","application/json");
-
                     }
                 }).build();
 
