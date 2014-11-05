@@ -1,7 +1,6 @@
 package kollektiv.zmittapp.serverconnections.asynctasks;
 
 import android.content.Context;
-import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -9,9 +8,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 
-import kollektiv.zmittapp.activity.MainActivity;
 import kollektiv.zmittapp.activity.SplashActivity;
-import kollektiv.zmittapp.activity.ZmittapApplication;
 import kollektiv.zmittapp.entities.Restaurant;
 import kollektiv.zmittapp.serverconnections.ZmittappRestInterface;
 import retrofit.RequestInterceptor;
