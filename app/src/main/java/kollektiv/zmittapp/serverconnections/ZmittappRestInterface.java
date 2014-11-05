@@ -5,6 +5,7 @@ import kollektiv.zmittapp.entities.Restaurant;
 import retrofit.http.GET;
 import retrofit.http.POST;
 import retrofit.http.Path;
+import retrofit.http.Query;
 
 /**
  * Created by tzhware7 on 01.11.14.
@@ -22,8 +23,8 @@ public interface ZmittappRestInterface {
     @GET("/restaurants/{restaurant_id}/menuitems")
     Menu[] getMenus(@Path("restaurant_id") int restaurantId);
 
-    @GET("restaurants/location?lat={lat}?lon={lon}")
-    Restaurant[] getRestaurantsByLocation(@Path("lat") double lat, @Path("lon") double lon);
+    @GET("/restaurants/location")
+    Restaurant[] getRestaurantsByLocation(@Query("lat") double lat, @Query("lon") double lon);
 
 
 
