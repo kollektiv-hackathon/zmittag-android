@@ -1,7 +1,10 @@
 package kollektiv.zmittapp.entities;
 
+import com.google.gson.annotations.Expose;
+
 import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonProperty;
+
 
 /**
  * Created by tzhware7 on 01.11.14.
@@ -9,52 +12,136 @@ import org.codehaus.jackson.annotate.JsonProperty;
 public class Restaurant {
 
 
-    private int ID;
-    private String NAME;
-    private String PHONE;
-    private String EMAIL;
-    private double LONGITUDE;
-    private double LATITUDE;
+    @Expose
+    private Integer id;
+    @Expose
+    private String name;
+    @Expose
+    private String phone;
+    @Expose
+    private String email;
+    @Expose
+    private Double lat;
+    @Expose
+    private Double lon;
+    @Expose
+    private Double distance;
 
-    @JsonCreator
-    public Restaurant(@JsonProperty("id") int id,
-                      @JsonProperty("name") String NAME,
-                      @JsonProperty("phone") String PHONE,
-                      @JsonProperty("email") String EMAIL,
-                      @JsonProperty("longitude") double LONGITUDE,
-                      @JsonProperty("latitude") double LATITUDE){
-
-        this.ID = id;
-        this.NAME = NAME;
-        this.PHONE = PHONE;
-        this.EMAIL = EMAIL;
-        this.LONGITUDE = LONGITUDE;
-        this.LATITUDE = LATITUDE;
-
+    /**
+     *
+     * @return
+     * The id
+     */
+    public Integer getId() {
+        return id;
     }
 
-    public int getID(){
-        return ID;
+    /**
+     *
+     * @param id
+     * The id
+     */
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getNAME(){
-        return NAME;
+    /**
+     *
+     * @return
+     * The name
+     */
+    public String getName() {
+        return name;
     }
 
-    public String getPHONE(){
-        return PHONE;
+    /**
+     *
+     * @param name
+     * The name
+     */
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getEMAIL(){
-        return EMAIL;
+    /**
+     *
+     * @return
+     * The phone
+     */
+    public String getPhone() {
+        return phone;
     }
 
-    public double getLONGITUDE(){
-        return LONGITUDE;
+    /**
+     *
+     * @param phone
+     * The phone
+     */
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public double getLATITUDE(){
-        return LATITUDE;
+    /**
+     *
+     * @return
+     * The email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     *
+     * @param email
+     * The email
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    /**
+     *
+     * @return
+     * The lat
+     */
+    public Double getLat() {
+        return lat;
+    }
+
+    /**
+     *
+     * @param lat
+     * The lat
+     */
+    public void setLat(Double lat) {
+        this.lat = lat;
+    }
+
+    /**
+     *
+     * @return
+     * The lon
+     */
+    public Double getLon() {
+        return lon;
+    }
+
+    /**
+     *
+     * @param lon
+     * The lon
+     */
+    public void setLon(Double lon) {
+        this.lon = lon;
+    }
+
+    /**
+     *
+     * @return
+     * The distance
+     */
+    public Double getDistance() {
+        return distance;
     }
 
 

@@ -1,6 +1,7 @@
 package kollektiv.zmittapp.serverconnections.asynctasks;
 
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -8,11 +9,24 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.google.gson.Gson;
+
+import org.codehaus.jackson.map.ObjectMapper;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.List;
+
+import kollektiv.zmittapp.activity.MainActivity;
 import kollektiv.zmittapp.activity.SplashActivity;
 import kollektiv.zmittapp.entities.Restaurant;
 import kollektiv.zmittapp.serverconnections.ZmittappRestInterface;
+import retrofit.Callback;
 import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 /**
  * Created by tzhware7 on 04.11.14.
@@ -53,11 +67,12 @@ public class FetchNearRestaurantsByCoordinates extends AsyncTask<Context, Intege
 
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint("http://api.zmittapp.ch/app_dev.php")
+                .setLogLevel(RestAdapter.LogLevel.FULL) //Delete Afterwards
                 .setRequestInterceptor(new RequestInterceptor() {
                     @Override
                     public void intercept(RequestInterceptor.RequestFacade request) {
                         request.addHeader("Accept", "application/json");
-                        request.addHeader("Content-Type  ","application/json");
+                        request.addHeader("Content-Type  ", "application/json");
                     }
                 }).build();
 
@@ -65,11 +80,20 @@ public class FetchNearRestaurantsByCoordinates extends AsyncTask<Context, Intege
         //Restaurant[] restaurants = mZmittappRestInterface.getAllRestaurants();
         Restaurant[] restaurants = mZmittappRestInterface.getRestaurantsByLocation(latitude, longitude);
 
-        Log.d("Fetcher", "Restaurants = " + restaurants);
-        //Intent intent = new Intent(contexts[0], MainActivity.class);
-        //intent.putExtra("Restaurant", restaurants);
-        //contexts[0].startActivity(intent);
+        Log.d("Fetcher", "So viele Restaurants haben wir = " + restaurants.length);
 
+        for (int i = 0; i < restaurants.length; i++) {
+            Log.d("Fetcher", "Restaurant " + restaurants[i].getName());
+        }
+        
+
+        /*Restaurant m1 = restaurants[0];
+        Log.d("TEST", m1.getNAME() + m1.getEMAIL() + m1.getPHONE() + m1.getDISTANCE());
+        Intent intent = new Intent(contexts[0], MainActivity.class);
+        intent.putExtra("restaurants", new Gson().toJson(restaurants));
+        contexts[0].startActivity(intent);*/
+
+        mLocationManager.removeUpdates(mVeggsterLocationListener);
         return null;
     }
 

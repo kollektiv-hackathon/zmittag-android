@@ -2,10 +2,16 @@ package kollektiv.zmittapp.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.gson.Gson;
+
+import org.codehaus.jackson.JsonFactory;
+
 import kollektiv.zmittapp.R;
+import kollektiv.zmittapp.entities.Restaurant;
 
 
 public class MainActivity extends Activity {
@@ -14,6 +20,10 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Bundle mBundle = getIntent().getExtras();
+        String mTest = mBundle.getString("restaurants");
+        Log.d("MainActivity", mTest);
+
     }
 
 

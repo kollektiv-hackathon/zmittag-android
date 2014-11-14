@@ -3,6 +3,8 @@ package kollektiv.zmittapp.serverconnections.asynctasks;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
+import java.util.List;
+
 import kollektiv.zmittapp.entities.Menu;
 import kollektiv.zmittapp.entities.Restaurant;
 import kollektiv.zmittapp.serverconnections.RequestGenerator;
@@ -13,7 +15,7 @@ import retrofit.RestAdapter;
 /**
  * Created by tzhware7 on 05.11.14.
  */
-public class DataFetcher extends AsyncTask<Bundle, String, Object[]> {
+public class DataFetcher extends AsyncTask<Bundle, String, List> {
 
 
     /**
@@ -28,7 +30,7 @@ public class DataFetcher extends AsyncTask<Bundle, String, Object[]> {
      * Entsprechene Arrays können im RequestGenerator erstellt werden.
      */
     @Override
-    protected Object[] doInBackground(Bundle... bundles) {
+    protected List doInBackground(Bundle... bundles) {
 
         Bundle mRequestBundle = bundles[0];
 
@@ -45,16 +47,15 @@ public class DataFetcher extends AsyncTask<Bundle, String, Object[]> {
 
         switch (mRequestBundle.getInt(RequestGenerator.RequestMethod)){
             case 1:
-                Restaurant[] mRestaurants = mZmittappRestInterface.getAllRestaurants();
+                List<Restaurant> mRestaurants = mZmittappRestInterface.getAllRestaurants();
                 return mRestaurants;
 
             case 2:
-                Restaurant mRestaurant = mZmittappRestInterface.getRestaurant(mRequestBundle.getInt(RequestGenerator.RequestRestaurantId));
-                Object[] obj = new Object[] { mRestaurant };
-                return obj;
+                List<Restaurant> mRestaurant = mZmittappRestInterface.getRestaurant(mRequestBundle.getInt(RequestGenerator.RequestRestaurantId));
+                return mRestaurant;
 
             case 3:
-                Menu[] mMenus = mZmittappRestInterface.getMenus(mRequestBundle.getInt(RequestGenerator.RequestRestaurantId));
+                List<Menu> mMenus = mZmittappRestInterface.getMenus(mRequestBundle.getInt(RequestGenerator.RequestRestaurantId));
                 return mMenus;
 
             case 4:
@@ -68,7 +69,7 @@ public class DataFetcher extends AsyncTask<Bundle, String, Object[]> {
                 return null;
 
             case 6:
-                Restaurant[] mSuscribenRestaurants = mZmittappRestInterface.getSubscribenRestaurants(mRequestBundle.getString(RequestGenerator.RequestAndroidId));
+                List<Restaurant> mSuscribenRestaurants = mZmittappRestInterface.getSubscribenRestaurants(mRequestBundle.getString(RequestGenerator.RequestAndroidId));
                 return mSuscribenRestaurants;
         }
 

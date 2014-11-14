@@ -1,5 +1,6 @@
 package kollektiv.zmittapp.activity;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -17,11 +18,17 @@ public class SplashActivity extends Activity{
 
     private ProgressBar mProgressbar;
     public static Context mContext;
+    private ActionBar mActionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
+
+
+        //Hide Actionbar
+        getActionBar().hide();
 
 
         mProgressbar = (ProgressBar) findViewById(R.id.pb_splash);

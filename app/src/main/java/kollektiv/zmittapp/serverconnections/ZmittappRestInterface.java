@@ -1,5 +1,7 @@
 package kollektiv.zmittapp.serverconnections;
 
+import java.util.List;
+
 import kollektiv.zmittapp.entities.Menu;
 import kollektiv.zmittapp.entities.Restaurant;
 import retrofit.http.GET;
@@ -13,21 +15,22 @@ import retrofit.http.Query;
 public interface ZmittappRestInterface {
 
     // Restaurants & Menus allgemein
+    // TODO: Response überprüfen JSON to JAVAObjects.
 
     @GET("/restaurants/")
-    Restaurant[] getAllRestaurants();
+    List<Restaurant> getAllRestaurants();
 
     @GET("/restaurants/{restaurant_id}")
-    Restaurant getRestaurant(@Path("restaurant_id") int restaurantId);
+    List<Restaurant> getRestaurant(@Path("restaurant_id") int restaurantId);
 
     @GET("/restaurants/{restaurant_id}/menuitems")
-    Menu[] getMenus(@Path("restaurant_id") int restaurantId);
+    List<Menu> getMenus(@Path("restaurant_id") int restaurantId);
 
     @GET("/restaurants/location")
-    Restaurant[] getRestaurantsByLocation(@Query("lat") double lat, @Query("lon") double lon);
+    List<Restaurant> getRestaurantsByLocation(@Query("lat") double lat, @Query("lon") double lon);
 
     @GET("/user/{user_id}/subscriptions")
-    Restaurant[] getSubscribenRestaurants(@Path("user_id") String user_id);
+    List<Restaurant> getSubscribenRestaurants(@Path("user_id") String user_id);
 
 
     // Suscribe / Unsuscribe
