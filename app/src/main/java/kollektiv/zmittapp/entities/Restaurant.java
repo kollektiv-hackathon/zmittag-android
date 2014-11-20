@@ -2,14 +2,14 @@ package kollektiv.zmittapp.entities;
 
 import com.google.gson.annotations.Expose;
 
-import org.codehaus.jackson.annotate.JsonCreator;
-import org.codehaus.jackson.annotate.JsonProperty;
+
+import java.io.Serializable;
 
 
 /**
  * Created by tzhware7 on 01.11.14.
  */
-public class Restaurant {
+public class Restaurant implements Serializable {
 
 
     @Expose

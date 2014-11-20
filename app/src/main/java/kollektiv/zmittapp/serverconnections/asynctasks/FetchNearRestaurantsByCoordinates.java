@@ -8,30 +8,19 @@ import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-
-import com.google.gson.Gson;
-
-import org.codehaus.jackson.map.ObjectMapper;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.List;
 
 import kollektiv.zmittapp.activity.MainActivity;
 import kollektiv.zmittapp.activity.SplashActivity;
 import kollektiv.zmittapp.entities.Restaurant;
 import kollektiv.zmittapp.serverconnections.ZmittappRestInterface;
-import retrofit.Callback;
 import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
 
 /**
  * Created by tzhware7 on 04.11.14.
  */
-public class FetchNearRestaurantsByCoordinates extends AsyncTask<Context, Integer, String> {
+public class FetchNearRestaurantsByCoordinates extends AsyncTask<Context, Integer, List<Restaurant>> {
 
     public double latitude = 0.0;
     public double longitude = 0.0;
@@ -59,7 +48,7 @@ public class FetchNearRestaurantsByCoordinates extends AsyncTask<Context, Intege
 
 
     @Override
-    protected String doInBackground(Context... contexts) {
+    protected List doInBackground(Context... contexts) {
 
         while (this.latitude == 0.0) {
 
@@ -77,24 +66,19 @@ public class FetchNearRestaurantsByCoordinates extends AsyncTask<Context, Intege
                 }).build();
 
         ZmittappRestInterface mZmittappRestInterface = restAdapter.create(ZmittappRestInterface.class);
-        //Restaurant[] restaurants = mZmittappRestInterface.getAllRestaurants();
-        Restaurant[] restaurants = mZmittappRestInterface.getRestaurantsByLocation(latitude, longitude);
+        List<Restaurant> restaurants = mZmittappRestInterface.getRestaurantsByLocation(latitude, longitude);
 
-        Log.d("Fetcher", "So viele Restaurants haben wir = " + restaurants.length);
-
-        for (int i = 0; i < restaurants.length; i++) {
-            Log.d("Fetcher", "Restaurant " + restaurants[i].getName());
+        Log.d("Fetcher", "So viele Restaurants haben wir = " + restaurants.size() + " das sind folgende:");
+        for (int i = 0; i < restaurants.size(); i++) {
+            Log.d("Fetcher", "Restaurant " + restaurants.get(i).getName());
         }
-        
 
-        /*Restaurant m1 = restaurants[0];
-        Log.d("TEST", m1.getNAME() + m1.getEMAIL() + m1.getPHONE() + m1.getDISTANCE());
         Intent intent = new Intent(contexts[0], MainActivity.class);
-        intent.putExtra("restaurants", new Gson().toJson(restaurants));
-        contexts[0].startActivity(intent);*/
+        //intent.putExtra("restaurant", (List<restaurant>) restaurants);
+        contexts[0].startActivity(intent);
 
         mLocationManager.removeUpdates(mVeggsterLocationListener);
-        return null;
+        return restaurants;
     }
 
     public class VeggsterLocationListener implements LocationListener {
